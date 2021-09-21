@@ -8,6 +8,11 @@ public class Employee {
     public static void main(String[] args) {
         DatabaseHelper db = new DatabaseHelper();
         ResultSet employees = db.gelEmployees();
+
+        int rowId = db.addEmployee("ajay pal","ceo","abcd", "901290202", 90120);
+        if(rowId!=-1){
+            System.out.println("Success");
+        }
         /* displaying the data*/
         System.out.println("Company Employee list:");
         try {
