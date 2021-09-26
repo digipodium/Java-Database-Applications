@@ -1,28 +1,29 @@
 package example;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Calculator {
     private JTextField textOutput;
-    private JButton ACButton;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton a7Button;
-    private JButton a8Button;
-    private JButton a9Button;
-    private JButton xButton;
-    private JButton a4Button;
-    private JButton a5Button;
-    private JButton a6Button;
-    private JButton button7;
-    private JButton a1Button;
-    private JButton a2Button;
-    private JButton a3Button;
-    private JButton button11;
-    private JButton a0Button;
-    private JButton button6;
-    private JButton button8;
+    private JButton buttonAC;
+    private JButton buttonDiv;
+    private JButton buttonPosNeg;
+    private JButton buttonMod;
+    private JButton btn7;
+    private JButton btn8;
+    private JButton btn9;
+    private JButton buttonMul;
+    private JButton btn4;
+    private JButton btn5;
+    private JButton btn6;
+    private JButton buttonMinus;
+    private JButton btn1;
+    private JButton btn2;
+    private JButton btn3;
+    private JButton buttonPlus;
+    private JButton button0;
+    private JButton buttonDot;
+    private JButton buttonEquals;
     private JPanel panel;
 
     public Calculator() {
@@ -32,6 +33,7 @@ public class Calculator {
         JFrame frame = new JFrame("Calculator");
         frame.setContentPane(new Calculator().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(300,200));
         frame.pack();
         frame.validate();
         frame.setVisible(true);
