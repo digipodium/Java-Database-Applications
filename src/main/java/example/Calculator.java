@@ -28,7 +28,7 @@ public class Calculator {
 
     public String operation = null;
     public String operand1 = null;
-    public String operand2= null;
+    public String operand2 = null;
 
     public Calculator() {
         btn1.addActionListener(e -> updateOutput("1"));
@@ -49,17 +49,27 @@ public class Calculator {
 
     }
 
-    private void handleOperationClick(String add) {
-        operation = add;
+    /**
+     * handle click on operator like + - * /
+     * take existing numbers from output area as input values
+     *
+     * @param operator the operator string
+     */
+    private void handleOperationClick(String operator) {
+        operation = operator;
         operand1 = textOutput.getText();
         textOutput.setText("");
+        System.out.println("->"+operator);
     }
 
+    /**
+     * handles onclick for = button
+     */
     private void handleOperation() {
         operand2 = textOutput.getText();
         switch (operation) {
             case "add":
-                addNumbers(operand1,operand2);
+                addNumbers(operand1, operand2);
                 break;
             case "sub":
                 break;
@@ -68,6 +78,7 @@ public class Calculator {
             case "div":
                 break;
             default:
+                System.out.println(operation == "add");
                 break;
         }
 
@@ -77,8 +88,38 @@ public class Calculator {
     }
 
     private void addNumbers(String operand1, String operand2) {
-
+        if (operand1.contains(".") || operand2.contains(".")) {
+            float op1 = Float.parseFloat(operand1);
+            float op2 = Float.parseFloat(operand2);
+            float out = op1 + op2;
+            show_and_swap(operand2, String.valueOf(out));
+        } else if (!operand1.contains(".") && !operand2.contains(".")) {
+            int op1 = Integer.parseInt(operand1);
+            int op2 = Integer.parseInt(operand2);
+            int out = op1 + op2;
+            show_and_swap(operand2, String.valueOf(out));
+        } else{
+            textOutput.setText("ERROR");
+            // log result for
+            System.out.println(operand1);
+            System.out.println("+");
+            System.out.println(operand2);
+        }
     }
+
+    private void show_and_swap(String operand2, String s) {
+        textOutput.setText(s);
+        this.operand1 = operand2;
+        this.operand2 = s;
+    }
+
+    //todo add function to subtract
+    //todo add function to divide
+    //todo add function to multiply
+    //todo add function to mod
+    //todo add function to pos_neg
+    //todo add function to clear
+    //todo add function to . click
 
     private void updateOutput(String s) {
         String oldText = textOutput.getText();
