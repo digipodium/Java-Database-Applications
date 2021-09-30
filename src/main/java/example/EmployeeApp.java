@@ -41,11 +41,19 @@ public class EmployeeApp {
                 if (status != -1) {
                     System.out.println("data added");
                     updateEmpList(dbHelper);
+                    clearForm();
                 }
             } catch (Exception e1) {
                 System.out.println("error" + e1.getMessage());
             }
+        }else{
+            // todo show a alert dialog
         }
+    }
+
+    private void clearForm() {
+        editEmpName.setText(""); // this makes the input box empty
+        // todo clearForm() clear the form when this method is called
     }
 
     private void updateEmpList(DatabaseHelper dbHelper) {
