@@ -24,9 +24,43 @@ public class EmployeeApp {
         DatabaseHelper dbHelper = new DatabaseHelper();
         updateEmpList(dbHelper);
         btnAdd.addActionListener(e -> addNewEmployee(dbHelper, e));
+        deleteButton.addActionListener(e -> deleteEmployee(dbHelper, e));
+        employeeList.addListSelectionListener(e -> showEmpDetail());
+        refreshButton.addActionListener(e -> updateEmpList(dbHelper));
+    }
+
+    private void deleteEmployee(DatabaseHelper dbHelper, ActionEvent e) {
+        String idStr = editEmpId.getText();
+        if (idStr.length() > 0) {
+            try {
+                int id = Integer.parseInt(idStr);
+                int status = dbHelper.deleteEmployee(id);
+                if (status != 0) {
+                    System.out.println("successfully deleted");
+                    updateEmpList(dbHelper);
+                }
+            } catch (Exception error) {
+                System.out.println(error.getMessage());
+            }
+        } else {
+            // todo show an alert dialog
+        }
+    }
+
+    private void showEmpDetail() {
+        EmpModel emp = (EmpModel) employeeList.getSelectedValue();
+        if (emp != null) {
+            editEmpId.setText(String.valueOf(emp.id));
+            editEmpName.setText(emp.name);
+            editEmpDesig.setText(emp.designation);
+            editEmpAddr.setText(emp.address);
+            editEmpPhone.setText(emp.phone);
+            editEmpSalary.setText(String.valueOf(emp.salary));
+        }
     }
 
     private void addNewEmployee(DatabaseHelper dbHelper, ActionEvent e) {
+        // todo handle how the employee data is updated
         String name = editEmpName.getText();
         String addr = editEmpAddr.getText();
         String desig = editEmpDesig.getText();
@@ -46,7 +80,7 @@ public class EmployeeApp {
             } catch (Exception e1) {
                 System.out.println("error" + e1.getMessage());
             }
-        }else{
+        } else {
             // todo show a alert dialog
         }
     }
